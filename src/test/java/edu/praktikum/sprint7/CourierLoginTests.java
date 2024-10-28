@@ -4,7 +4,6 @@ import edu.praktikum.sprint7.clients.CourierClient;
 import edu.praktikum.sprint7.models.Courier;
 import edu.praktikum.sprint7.models.CourierCreds;
 import edu.praktikum.sprint7.models.CourierId;
-import edu.praktikum.sprint7.utils.Utils;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

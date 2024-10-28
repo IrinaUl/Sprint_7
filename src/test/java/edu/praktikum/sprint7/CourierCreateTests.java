@@ -2,11 +2,10 @@ package edu.praktikum.sprint7;
 
 import edu.praktikum.sprint7.clients.CourierClient;
 import edu.praktikum.sprint7.models.Courier;
-import edu.praktikum.sprint7.models.CourierId;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.After;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +20,6 @@ public class CourierCreateTests {
 
     private CourierClient courierClient;
     private Courier courier;
-    private int id;
 
     @Before
     public void setUp() {
@@ -34,7 +32,6 @@ public class CourierCreateTests {
     public void createCourier() {
         courier = randomCourier();
         Response response = courierClient.create(courier);
-        id = response.as(CourierId.class).getId();
 
         assertEquals("Неверный статус код", SC_CREATED, response.statusCode());
         assertEquals("Описание ответа не соответствует ожидаемому", true, response.path("ok"));
@@ -49,7 +46,7 @@ public class CourierCreateTests {
         Response response = courierClient.create(courier);
 
         assertEquals("Неверный статус код", SC_BAD_REQUEST, response.statusCode());
-        assertEquals("Описание ответа не соответствует ожидаемому","Недостаточно данных для создания учетной записи", response.path("message"));
+        assertEquals("Описание ответа не соответствует ожидаемому", "Недостаточно данных для создания учетной записи", response.path("message"));
     }
 
     @Test
@@ -70,14 +67,8 @@ public class CourierCreateTests {
         courier = randomCourier();
         courierClient.create(courier);
         Response response = courierClient.create(courier);
-        id = response.as(CourierId.class).getId();
 
         assertEquals("Неверный статус код", SC_CONFLICT, response.statusCode());
         assertEquals("Описание ответа не соответствует ожидаемому", "Этот логин уже используется", response.path("message"));
-    }
-
-    @After
-    public void tearDown() {
-        courierClient.delete(id);
     }
 }
