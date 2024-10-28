@@ -2,6 +2,8 @@ package edu.praktikum.sprint7;
 
 import edu.praktikum.sprint7.clients.CourierClient;
 import edu.praktikum.sprint7.models.Courier;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -29,6 +31,7 @@ public class CourierCreateTests {
 
     @Test
     @DisplayName("Создание курьера")
+    @Description("Проверка регистрации нового курьера на платформе")
     public void createCourier() {
         courier = randomCourier();
         Response response = courierClient.create(courier);
@@ -63,7 +66,8 @@ public class CourierCreateTests {
 
     @Test
     @DisplayName("Создание двух одинаковых курьеров")
-    public void createCouriersWithDuplicateLogin() { //todo Найден баг "Описание ответа не соответствует ожидаемому"
+    @Issue("BUG-TEST") //todo Найден баг "Описание ответа не соответствует ожидаемому"
+    public void createCouriersWithDuplicateLogin() {
         courier = randomCourier();
         courierClient.create(courier);
         Response response = courierClient.create(courier);
