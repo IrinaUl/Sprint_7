@@ -64,7 +64,7 @@ public class CourierCreateTests {
         assertEquals("Описание ответа не соответствует ожидаемому", "Недостаточно данных для создания учетной записи", response.path("message"));
     }
 
-   /* @Test
+   @Test
     @DisplayName("Создание двух одинаковых курьеров")
     @Issue("BUG-TEST") //todo Найден баг "Описание ответа не соответствует ожидаемому"
     public void createCouriersWithDuplicateLogin() {
@@ -74,5 +74,5 @@ public class CourierCreateTests {
 
         assertEquals("Неверный статус код", SC_CONFLICT, response.statusCode());
         assertEquals("Описание ответа не соответствует ожидаемому", "Этот логин уже используется", response.path("message"));
-    } */
+    }
 }
